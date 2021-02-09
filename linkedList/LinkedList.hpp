@@ -52,7 +52,6 @@ bool LinkedList<T>::search(T value) const
 			}
 		}
 	}
-
 	return(isFound);
 }
 
@@ -111,10 +110,27 @@ bool LinkedList<T>::removeBack()
 	Node<T>* secondintoLast = nullptr;
 	bool isRemoved = false;
 
-	/** TODO 
-		Fix this method
-	*/
-
+	if(!isEmpty())
+	{
+		if(m_size == 1)
+		{
+			removeFront();
+			isRemoved = true;
+		}
+		else
+		{
+			secondintoLast = m_front;
+			for(int i = 0; i < size() - 2; i++)
+			{
+				secondintoLast = secondintoLast->getNext();
+			}
+			lastNode = secondintoLast->getNext();
+			delete lastNode;
+			secondintoLast->setNext(nullptr);
+			m_size--;
+			isRemoved = true;
+		}
+	}
 	return(isRemoved);
 }	
 
